@@ -254,8 +254,8 @@ class getData: ObservableObject {
     
     func updateData() {
     
-        let url: String = "https://corona.lmao.ninja/countries/taiwan"
-        let url1: String = "https://corona.lmao.ninja/countries/"
+        let url: String = "https://corona.lmao.ninja/v2/countries/taiwan"
+        let url1: String = "https://corona.lmao.ninja/v2/countries/"
         
         let session = URLSession(configuration: .default)
         let session1 = URLSession(configuration: .default)
