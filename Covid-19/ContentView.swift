@@ -254,8 +254,11 @@ class getData: ObservableObject {
             }
         }.resume()
         
+        
+        
         for i in country {
-            session1.dataTask(with: URL(string: url1+i)!) {
+            let newTarget = url1 + i
+            session1.dataTask(with: URL(string: newTarget)!) {
                 (data, res, err) in
                 if err != nil {
                     print((err?.localizedDescription)!)
@@ -275,7 +278,7 @@ class getData: ObservableObject {
 }
 //var country_default = ["Taiwan", "Japan", "S. Korea", "China","USA", "Italy"]
 
-var country = ["Taiwan", "Japan", "Macao", "China","USA", "Italy", "Spain", "Australia", "Singapore"]
+var country = ["Taiwan", "Japan", "Uganda", "Vietnam", "Thailand", "Macao", "China","USA", "Italy", "Spain", "Australia", "Singapore", "Russia", "UAE"]
 struct Indicator: UIViewRepresentable {
     func makeUIView(context: UIViewRepresentableContext<Indicator>) -> UIActivityIndicatorView {
         let v = UIActivityIndicatorView(style: .large)
