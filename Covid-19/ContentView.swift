@@ -18,23 +18,29 @@ struct ContentView: View {
                 if self.data.countries.count != 0 && self.data.data != nil {
                     VStack {
                         HStack(alignment: .top) {
-                            VStack(alignment: .leading, spacing: 15) {
+                            VStack(alignment: .leading, spacing: 10) {
                                 Text("離上次更新時間：\(getDate(time: self.data.data.updated))")
                                     .fontWeight(.semibold)
                                     .foregroundColor(.white)
-                                Text("COVID-19 <台灣目前疫情狀況>")
+                                Text("COVID-19<全世界疫情狀況>")
                                     .fontWeight(.semibold)
                                     .foregroundColor(.white)
-                                Text("目前總計人數：\(getValue(data: self.data.data.cases))")
+                                Text("全世界病患總人數：\(getValue(data: self.data.data.cases))")
                                     .fontWeight(.bold)
-                                    .font(.title)
+                                    .font(.body)
                                     .foregroundColor(.white)
+                                Text("習維尼的武漢病毒蔓延迅速, 請各位做好保護措施")
+                                    .fontWeight(.bold)
+                                    .font(.system(size: 14, weight: Font.Weight.regular, design: Font.Design.rounded))
+                                    .foregroundColor(.red)
+                                    .padding()
+                                    .background(Color.white.opacity(0.8))
+                                    .cornerRadius(30)
                             }
                             
                             Spacer()
                             
                             Button(action: {
-                                //do something here
                                 self.data.data = nil
                                 self.data.countries.removeAll()
                                 self.data.updateData()
@@ -47,14 +53,14 @@ struct ContentView: View {
                         }
                         .padding(.top, (UIApplication.shared.windows.first?.safeAreaInsets.top))
                         .padding()
-                        .padding(.bottom, 80)
-                        .background(Color.red.opacity(0.9))
+                        .padding(.bottom, 60)
+                        .background(Color.red.opacity(0.8))
                         
                         HStack(spacing: 15) {
                             VStack(alignment: .center, spacing: 15) {
                                 Text("死亡人數")
                                     .foregroundColor(Color.black.opacity(0.5))
-                                Text("\(getValue(data: self.data.data.deaths))人")
+                                Text(getValue(data: self.data.data.deaths))
                                     .font(.title)
                                     .fontWeight(.bold)
                                     .foregroundColor(.red)
@@ -63,10 +69,10 @@ struct ContentView: View {
                             .background(Color.white)
                             .cornerRadius(12)
                             
-                            VStack(alignment: .leading, spacing: 15) {
+                            VStack(alignment: .center, spacing: 15) {
                                 Text("痊癒人數")
                                     .foregroundColor(Color.black.opacity(0.5))
-                                Text("\(getValue(data: self.data.data.recovered))人")
+                                Text(getValue(data: self.data.data.recovered))
                                     .font(.title)
                                     .fontWeight(.bold)
                                     .foregroundColor(.green)
@@ -82,7 +88,7 @@ struct ContentView: View {
                         VStack(alignment: .center, spacing: 15) {
                             Text("確診人數")
                                 .foregroundColor(Color.black.opacity(0.5))
-                            Text("\(getValue(data: self.data.data.active))人")
+                            Text(getValue(data: self.data.data.active))
                                 .font(.title)
                                 .fontWeight(.bold)
                                 .foregroundColor(.yellow)
@@ -101,8 +107,12 @@ struct ContentView: View {
                             .padding()
                         }
                         VStack(alignment: .center, spacing: 12) {
-                            
                             Text("Albert Cheng 2020/04/14")
+                                .fontWeight(.bold)
+                                .foregroundColor(.red)
+                                .font(.system(size: 15))
+                            
+                            Text("Latest Version: 2020/04/17")
                                 .fontWeight(.bold)
                                 .foregroundColor(.red)
                                 .font(.system(size: 15))
@@ -112,13 +122,8 @@ struct ContentView: View {
                                 .foregroundColor(.red)
                                 .font(.system(size: 15))
                             
-                            Text("Latest Version: 2020/04/15")
-                                .fontWeight(.bold)
-                                .foregroundColor(.red)
-                                .font(.system(size: 10))
-                            
-                        }.padding(.bottom, 50)
-                            .padding(.top, 25)
+                        }.padding(.bottom, 40)
+                            .padding(.top, 10)
                         
                     }
                 } else {
@@ -200,6 +205,14 @@ struct cellView: View {
     }
 }
 
+struct Global: Decodable {
+    var updated: Double
+    var cases: Double
+    var deaths: Double
+    var recovered: Double
+    var active: Double
+}
+
 struct Case: Decodable {
     var cases: Double
     var deaths: Double
@@ -226,7 +239,9 @@ class getData: ObservableObject {
     }
     
     func updateData() {
-        let url: String = "https://corona.lmao.ninja/v2/countries/taiwan" //update the address version II of API here
+        //update the address version II of API here
+        //let url: String = "https://corona.lmao.ninja/v2/countries/taiwan"
+        let url: String = "https://corona.lmao.ninja/v2/all"
         let url1: String = "https://corona.lmao.ninja/v2/countries/"
         let session = URLSession(configuration: .default)
         let session1 = URLSession(configuration: .default)
@@ -267,7 +282,7 @@ class getData: ObservableObject {
 }
 //var country_default = ["Taiwan", "Japan", "S. Korea", "China","USA", "Italy"]
 
-var country = ["Taiwan", "Japan", "Macao", "China","USA", "Italy", "Spain", "Australia"]
+var country = ["Taiwan", "Japan", "Macao", "China","USA", "Italy", "Spain", "Australia", "Singapore"]
 struct Indicator: UIViewRepresentable {
     func makeUIView(context: UIViewRepresentableContext<Indicator>) -> UIActivityIndicatorView {
         let v = UIActivityIndicatorView(style: .large)
