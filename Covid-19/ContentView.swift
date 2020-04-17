@@ -205,15 +205,8 @@ struct cellView: View {
     }
 }
 
-struct Global: Decodable {
-    var updated: Double
-    var cases: Double
-    var deaths: Double
-    var recovered: Double
-    var active: Double
-}
 
-struct Case: Decodable {
+struct GlobalInfo: Decodable {
     var cases: Double
     var deaths: Double
     var recovered: Double
@@ -231,7 +224,7 @@ struct Details: Decodable, Hashable {
 }
 
 class getData: ObservableObject {
-    @Published var data: Case!
+    @Published var data: GlobalInfo!
     @Published var countries = [Details]()
     
     init() {
@@ -253,7 +246,7 @@ class getData: ObservableObject {
                 return
             }
             
-            let json = try! JSONDecoder().decode(Case.self, from: data!)
+            let json = try! JSONDecoder().decode(GlobalInfo.self, from: data!)
             
             DispatchQueue.main.async {
                 print(json)
