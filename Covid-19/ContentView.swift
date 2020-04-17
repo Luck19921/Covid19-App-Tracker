@@ -22,11 +22,9 @@ struct ContentView: View {
                                 Text("離上次更新時間：\(getDate(time: self.data.data.updated))")
                                     .fontWeight(.semibold)
                                     .foregroundColor(.white)
-                                
                                 Text("COVID-19 <台灣目前疫情狀況>")
                                     .fontWeight(.semibold)
                                     .foregroundColor(.white)
-                                
                                 Text("目前總計人數：\(getValue(data: self.data.data.cases))")
                                     .fontWeight(.bold)
                                     .font(.title)
@@ -54,10 +52,8 @@ struct ContentView: View {
                         
                         HStack(spacing: 15) {
                             VStack(alignment: .center, spacing: 15) {
-                                
                                 Text("死亡人數")
                                     .foregroundColor(Color.black.opacity(0.5))
-                                
                                 Text("\(getValue(data: self.data.data.deaths))人")
                                     .font(.title)
                                     .fontWeight(.bold)
@@ -68,10 +64,8 @@ struct ContentView: View {
                             .cornerRadius(12)
                             
                             VStack(alignment: .leading, spacing: 15) {
-                                
                                 Text("痊癒人數")
                                     .foregroundColor(Color.black.opacity(0.5))
-                                
                                 Text("\(getValue(data: self.data.data.recovered))人")
                                     .font(.title)
                                     .fontWeight(.bold)
@@ -86,15 +80,12 @@ struct ContentView: View {
                         .zIndex(25)
                         
                         VStack(alignment: .center, spacing: 15) {
-                            
                             Text("確診人數")
                                 .foregroundColor(Color.black.opacity(0.5))
-                            
                             Text("\(getValue(data: self.data.data.active))人")
                                 .font(.title)
                                 .fontWeight(.bold)
                                 .foregroundColor(.yellow)
-                            
                         }
                         .padding(30)
                         .background(Color.white)
@@ -102,13 +93,9 @@ struct ContentView: View {
                         .padding(.top, 15)
                         
                         ScrollView(.horizontal, showsIndicators: false) {
-                            
                             HStack(spacing: 15) {
-                                
                                 ForEach(self.data.countries, id: \.self) { myID in
-                                    
                                     cellView(data: myID)
-                                    
                                 }
                             }
                             .padding()
@@ -168,55 +155,41 @@ struct cellView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
-            
             Text("國家：\(data.country)")
                 .fontWeight(.bold)
             
             HStack(spacing: 15) {
                 
                 VStack(alignment: .center, spacing: 12) {
-                    
                     Text("確診人數")
                         .font(.title)
-                    
                     Text(getValue(data: data.cases))
                         .font(.title)
-                    
                 }
                 
                 VStack(alignment: .center, spacing: 12) {
                     
                     VStack(alignment: .center, spacing: 10) {
-                        
                         Text("死亡")
-                        
                         Text(getValue(data: data.deaths))
                             .foregroundColor(.red)
-                        
                     }
                     
                     Divider()
                     
                     VStack(alignment: .center, spacing: 10) {
-                        
                         Text("痊癒")
-                        
                         Text(getValue(data: data.recovered))
                             .foregroundColor(.green)
-                        
                     }
                     
                     Divider()
                     
                     VStack(alignment: .center, spacing: 10) {
-                        
                         Text("重症")
-                        
                         Text(getValue(data: data.critical))
                             .foregroundColor(.yellow)
-                        
                     }
-                    
                 }
             }
         }
@@ -253,16 +226,13 @@ class getData: ObservableObject {
     }
     
     func updateData() {
-    
-        let url: String = "https://corona.lmao.ninja/v2/countries/taiwan"
+        let url: String = "https://corona.lmao.ninja/v2/countries/taiwan" //update the address version II of API here
         let url1: String = "https://corona.lmao.ninja/v2/countries/"
-        
         let session = URLSession(configuration: .default)
         let session1 = URLSession(configuration: .default)
         
         session.dataTask(with: URL(string: url)!) {
             (data, res, err) in
-            
             if err != nil {
                 print((err?.localizedDescription)!)
                 return
@@ -277,7 +247,6 @@ class getData: ObservableObject {
         }.resume()
         
         for i in country {
-            
             session1.dataTask(with: URL(string: url1+i)!) {
                 (data, res, err) in
                 if err != nil {
@@ -286,20 +255,12 @@ class getData: ObservableObject {
                 }
                 
                 let json = try! JSONDecoder().decode(Details.self, from: data!)
-                //print("json by session1:\(json)")
-
                 DispatchQueue.main.async {
                     print(json)
                     self.countries.append(json)
                 }
-//
             }.resume()
-            
         }
-        
-        
-        
-        
     }
     
     
@@ -307,10 +268,7 @@ class getData: ObservableObject {
 //var country_default = ["Taiwan", "Japan", "S. Korea", "China","USA", "Italy"]
 
 var country = ["Taiwan", "Japan", "Macao", "China","USA", "Italy", "Spain", "Australia"]
-
-
 struct Indicator: UIViewRepresentable {
-    
     func makeUIView(context: UIViewRepresentableContext<Indicator>) -> UIActivityIndicatorView {
         let v = UIActivityIndicatorView(style: .large)
         v.startAnimating()
