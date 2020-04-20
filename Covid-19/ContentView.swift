@@ -21,28 +21,33 @@ struct ContentView: View {
                             VStack(alignment: .leading, spacing: 10) {
                                 Text("離上次更新時間：\(getDate(time: self.data.data.updated))")
                                     .fontWeight(.semibold)
+                                    .font(.system(size: 13, weight: Font.Weight.regular, design: Font.Design.monospaced))
                                     .foregroundColor(.white)
                                 Text("COVID-19<全世界疫情狀況>")
                                     .fontWeight(.semibold)
                                     .foregroundColor(.white)
-                                Text("全世界病患總人數：\(getValue(data: self.data.data.cases))")
+                                    .font(.system(size: 17, weight: Font.Weight.regular, design: Font.Design.monospaced))
+                                Text("全世界患病總人數：\(getValue(data: self.data.data.cases))")
                                     .fontWeight(.bold)
                                     .font(.body)
                                     .foregroundColor(.white)
-                                Text("習維尼的武漢病毒蔓延迅速, 請各位做好保護措施")
-                                    .fontWeight(.bold)
-                                    .font(.system(size: 14, weight: Font.Weight.regular, design: Font.Design.rounded))
-                                    .foregroundColor(.red)
-                                    .padding()
-                                    .background(Color.white.opacity(0.8))
-                                    .cornerRadius(30)
-                            }
+                                    .font(.system(size: 21, weight: Font.Weight.regular, design: Font.Design.monospaced))
+//                                Text("習維尼的武漢病毒蔓延迅速, 請各位做好保護措施")
+//                                    .fontWeight(.bold)
+//                                    .font(.system(size: 14, weight: Font.Weight.regular, design: Font.Design.rounded))
+//                                    .foregroundColor(.red)
+//                                    .padding()
+//                                    .background(Color.white.opacity(0.8))
+//                                    .cornerRadius(30)
+                            }.padding()
+                            .background(Color.white.opacity(0.2))
+                            .cornerRadius(20)
                             
                             Spacer()
                             
                             Button(action: {
-                                self.data.data = nil
-                                self.data.countries.removeAll()
+                                self.data.data = nil //reset our data
+                                self.data.countries.removeAll() //reset the list of countries
                                 self.data.updateData()
                                 
                             }) {
@@ -54,12 +59,12 @@ struct ContentView: View {
                         .padding(.top, (UIApplication.shared.windows.first?.safeAreaInsets.top))
                         .padding()
                         .padding(.bottom, 60)
-                        .background(Color.red.opacity(0.8))
+                        .background(Color.blue.opacity(0.7))
                         
                         HStack(spacing: 15) {
                             VStack(alignment: .center, spacing: 15) {
                                 Text("死亡人數")
-                                    .foregroundColor(Color.black.opacity(0.5))
+                                    .foregroundColor(Color.black)
                                 Text(getValue(data: self.data.data.deaths))
                                     .font(.title)
                                     .fontWeight(.bold)
@@ -71,7 +76,7 @@ struct ContentView: View {
                             
                             VStack(alignment: .center, spacing: 15) {
                                 Text("痊癒人數")
-                                    .foregroundColor(Color.black.opacity(0.5))
+                                    .foregroundColor(Color.black)
                                 Text(getValue(data: self.data.data.recovered))
                                     .font(.title)
                                     .fontWeight(.bold)
@@ -87,7 +92,7 @@ struct ContentView: View {
                         
                         VStack(alignment: .center, spacing: 15) {
                             Text("確診人數")
-                                .foregroundColor(Color.black.opacity(0.5))
+                                .foregroundColor(Color.black)
                             Text(getValue(data: self.data.data.active))
                                 .font(.title)
                                 .fontWeight(.bold)
@@ -109,17 +114,17 @@ struct ContentView: View {
                         VStack(alignment: .center, spacing: 12) {
                             Text("Albert Cheng 2020/04/14")
                                 .fontWeight(.bold)
-                                .foregroundColor(.red)
+                                .foregroundColor(.blue).opacity(0.7)
                                 .font(.system(size: 15))
                             
-                            Text("Latest Version: 2020/04/17")
+                            Text("Latest Version: 2020/04/20")
                                 .fontWeight(.bold)
-                                .foregroundColor(.red)
+                                .foregroundColor(.blue).opacity(0.7)
                                 .font(.system(size: 15))
                             
                             Text("Reference: Kavsoft")
                                 .fontWeight(.bold)
-                                .foregroundColor(.red)
+                                .foregroundColor(.blue).opacity(0.7)
                                 .font(.system(size: 15))
                             
                         }.padding(.bottom, 40)
@@ -134,16 +139,16 @@ struct ContentView: View {
                     }
                 }
             }.edgesIgnoringSafeArea(.top)
-                .background(Color.black.opacity(0.1)
-                    .edgesIgnoringSafeArea(.all))
-        }
+                .background(Color.black.opacity(0.1).edgesIgnoringSafeArea(.all))
+        }.edgesIgnoringSafeArea(.all)
     }
 }
 
 func getDate(time: Double) -> String {
-       //working api stuffs here
+       //How to parse the 'updated' params data from API
        let date = Double(time / 1000)
        let format = DateFormatter()
+       //set the format of date(Month, Day, Year, Hour, Minute, AM/PM)
        format.dateFormat = "MMM - dd - YYYY hh:mm a"
     return format.string(from: Date(timeIntervalSince1970: TimeInterval(exactly: date)!))
    }
@@ -156,7 +161,7 @@ func getDate(time: Double) -> String {
 
 struct cellView: View {
     
-    var data: Details
+    var data: DetailsInfo
     
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
@@ -215,7 +220,7 @@ struct GlobalInfo: Decodable {
     var updated: Double
 }
 
-struct Details: Decodable, Hashable {
+struct DetailsInfo: Decodable, Hashable {
     var country: String
     var cases: Double
     var deaths: Double
@@ -225,7 +230,7 @@ struct Details: Decodable, Hashable {
 
 class getData: ObservableObject {
     @Published var data: GlobalInfo!
-    @Published var countries = [Details]()
+    @Published var countries = [DetailsInfo]()
     
     init() {
         updateData()
@@ -234,12 +239,12 @@ class getData: ObservableObject {
     func updateData() {
         //update the address version II of API here
         //let url: String = "https://corona.lmao.ninja/v2/countries/taiwan"
-        let url: String = "https://corona.lmao.ninja/v2/all"
-        let url1: String = "https://corona.lmao.ninja/v2/countries/"
-        let session = URLSession(configuration: .default)
+        let url_global: String = "https://corona.lmao.ninja/v2/all"
+        let url_all_countries: String = "https://corona.lmao.ninja/v2/countries/"
         let session1 = URLSession(configuration: .default)
+        let session2 = URLSession(configuration: .default)
         
-        session.dataTask(with: URL(string: url)!) {
+        session1.dataTask(with: URL(string: url_global)!) {
             (data, res, err) in
             if err != nil {
                 print((err?.localizedDescription)!)
@@ -257,15 +262,15 @@ class getData: ObservableObject {
         
         
         for i in country {
-            let newTarget = url1 + i
-            session1.dataTask(with: URL(string: newTarget)!) {
+            let newTarget = url_all_countries + i
+            session2.dataTask(with: URL(string: newTarget)!) {
                 (data, res, err) in
                 if err != nil {
                     print((err?.localizedDescription)!)
                     return
                 }
                 
-                let json = try! JSONDecoder().decode(Details.self, from: data!)
+                let json = try! JSONDecoder().decode(DetailsInfo.self, from: data!)
                 DispatchQueue.main.async {
                     print(json)
                     self.countries.append(json)
