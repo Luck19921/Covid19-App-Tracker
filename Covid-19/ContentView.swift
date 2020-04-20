@@ -32,13 +32,6 @@ struct ContentView: View {
                                     .font(.body)
                                     .foregroundColor(.white)
                                     .font(.system(size: 21, weight: Font.Weight.regular, design: Font.Design.monospaced))
-//                                Text("習維尼的武漢病毒蔓延迅速, 請各位做好保護措施")
-//                                    .fontWeight(.bold)
-//                                    .font(.system(size: 14, weight: Font.Weight.regular, design: Font.Design.rounded))
-//                                    .foregroundColor(.red)
-//                                    .padding()
-//                                    .background(Color.white.opacity(0.8))
-//                                    .cornerRadius(30)
                             }.padding()
                             .background(Color.white.opacity(0.2))
                             .cornerRadius(20)
@@ -48,7 +41,7 @@ struct ContentView: View {
                             Button(action: {
                                 self.data.data = nil //reset our data
                                 self.data.countries.removeAll() //reset the list of countries
-                                self.data.updateData()
+                                self.data.updateData() //refresh the data from API
                                 
                             }) {
                                 Image(systemName: "arrow.clockwise")
@@ -156,11 +149,15 @@ func getDate(time: Double) -> String {
    func getValue(data: Double) -> String {
        let format = NumberFormatter()
        format.numberStyle = .decimal
+       format.groupingSeparator = ","
+       format.groupingSize = 4
+//       format.positivePrefix = "前綴字"
+       format.positiveSuffix = "人"
     return format.string(for: data)!
    }
 
 struct cellView: View {
-    
+    //cellView is the bottom view, which show the information from DetailsInfo Codable
     var data: DetailsInfo
     
     var body: some View {
@@ -283,7 +280,7 @@ class getData: ObservableObject {
 }
 //var country_default = ["Taiwan", "Japan", "S. Korea", "China","USA", "Italy"]
 
-var country = ["Taiwan", "Japan", "Uganda", "Vietnam", "Thailand", "Macao", "China","USA", "Italy", "Spain", "Australia", "Singapore", "Russia", "UAE"]
+var country = ["Taiwan", "Japan", "Uganda", "Vietnam", "Thailand", "Macao", "China","USA", "Italy", "Spain", "Australia", "Singapore", "Russia", "UAE", "Hong Kong"]
 struct Indicator: UIViewRepresentable {
     func makeUIView(context: UIViewRepresentableContext<Indicator>) -> UIActivityIndicatorView {
         let v = UIActivityIndicatorView(style: .large)
