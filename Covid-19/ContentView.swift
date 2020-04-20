@@ -280,7 +280,7 @@ class getData: ObservableObject {
 }
 //var country_default = ["Taiwan", "Japan", "S. Korea", "China","USA", "Italy"]
 
-var country = ["Taiwan", "Japan", "Uganda", "Vietnam", "Thailand", "Macao", "China","USA", "Italy", "Spain", "Australia", "Singapore", "Russia", "UAE", "Hong Kong"]
+var country = ["Taiwan", "Japan", "Uganda", "Vietnam", "Thailand", "Macao", "China","USA", "Italy", "Spain", "Australia", "Singapore", "Russia", "UAE"]
 struct Indicator: UIViewRepresentable {
     func makeUIView(context: UIViewRepresentableContext<Indicator>) -> UIActivityIndicatorView {
         let v = UIActivityIndicatorView(style: .large)
