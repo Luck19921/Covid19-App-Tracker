@@ -152,7 +152,7 @@ func getDate(time: Double) -> String {
        format.groupingSeparator = ","
        format.groupingSize = 4
 //       format.positivePrefix = "前綴字"
-       format.positiveSuffix = "人"
+//       format.positiveSuffix = "後綴字"
     return format.string(for: data)!
    }
 
