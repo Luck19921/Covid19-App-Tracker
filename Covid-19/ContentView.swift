@@ -223,6 +223,16 @@ struct DetailsInfo: Decodable, Hashable {
     var deaths: Double
     var recovered: Double
     var critical: Double
+//    var countryInfo: [CountryInfo]
+    
+//    struct CountryInfo: Decodable {
+//        var id: Double
+//        var iso2: String
+//        var iso3: String
+//        var lat: Double
+//        var long: Double
+//        var flag: String
+//    }
 }
 
 class getData: ObservableObject {
@@ -243,6 +253,7 @@ class getData: ObservableObject {
         
         session1.dataTask(with: URL(string: url_global)!) {
             (data, res, err) in
+            print("session1.dataTask de error:",err?.localizedDescription)
             if err != nil {
                 print((err?.localizedDescription)!)
                 return
@@ -266,12 +277,12 @@ class getData: ObservableObject {
                     print((err?.localizedDescription)!)
                     return
                 }
-                
                 let json = try! JSONDecoder().decode(DetailsInfo.self, from: data!)
                 DispatchQueue.main.async {
                     print(json)
                     self.countries.append(json)
                 }
+                
             }.resume()
         }
     }
@@ -280,7 +291,10 @@ class getData: ObservableObject {
 }
 //var country_default = ["Taiwan", "Japan", "S. Korea", "China","USA", "Italy"]
 
-var country = ["Taiwan", "Japan", "Uganda", "Vietnam", "Thailand", "Macao", "China","USA", "Italy", "Spain", "Australia", "Singapore", "Russia", "UAE"]
+//var country = ["Taiwan", "Japan", "Uganda", "Vietnam", "Thailand", "China", "USA", "Italy", "Spain", "Australia", "Singapore", "Russia", "UAE"]
+
+var country = ["taiwan", "japan", "usa", "uae", "singapore", "uganda", "china", "italy", "spain", "vietnam"]
+
 struct Indicator: UIViewRepresentable {
     func makeUIView(context: UIViewRepresentableContext<Indicator>) -> UIActivityIndicatorView {
         let v = UIActivityIndicatorView(style: .large)
