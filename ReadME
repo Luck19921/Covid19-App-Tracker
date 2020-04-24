@@ -5,3 +5,6 @@
 # 2020/04/14 made by Albert Cheng (@Lucky19921), revising and upload on 2020/04/15.
 # Taiwan[TW]
 ### 2020/04/23 API address is invalid, I will fix it recently. ###
+
+# 2020/04/24 I'm trying to fix the problem about searching some special country that made app crushing.
+But it seems like string issue???? Working on it and need more time.
