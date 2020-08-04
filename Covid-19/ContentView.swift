@@ -19,7 +19,7 @@ struct ContentView: View {
                     VStack {
                         HStack(alignment: .top) {
                             VStack(alignment: .leading, spacing: 10) {
-                                Text("離上次更新時間：\(getDate(time: self.data.data.updated))")
+                                Text("距上次更新：\(getDate(time: self.data.data?.updated ?? 0))")
                                     .fontWeight(.semibold)
                                     .font(.system(size: 13, weight: Font.Weight.regular, design: Font.Design.monospaced))
                                     .foregroundColor(.white)
@@ -27,7 +27,7 @@ struct ContentView: View {
                                     .fontWeight(.semibold)
                                     .foregroundColor(.white)
                                     .font(.system(size: 17, weight: Font.Weight.regular, design: Font.Design.monospaced))
-                                Text("全世界患病總人數：\(getValue(data: self.data.data.cases))")
+                                Text("全世界患病總人數：\(getValue(data: self.data.data?.cases ?? 0))")
                                     .fontWeight(.bold)
                                     .font(.body)
                                     .foregroundColor(.white)
@@ -58,7 +58,7 @@ struct ContentView: View {
                             VStack(alignment: .center, spacing: 15) {
                                 Text("死亡人數")
                                     .foregroundColor(Color.black)
-                                Text(getValue(data: self.data.data.deaths))
+                                Text(getValue(data: self.data.data?.deaths ?? 0))
                                     .font(.title)
                                     .fontWeight(.bold)
                                     .foregroundColor(.red)
@@ -70,7 +70,7 @@ struct ContentView: View {
                             VStack(alignment: .center, spacing: 15) {
                                 Text("痊癒人數")
                                     .foregroundColor(Color.black)
-                                Text(getValue(data: self.data.data.recovered))
+                                Text(getValue(data: self.data.data?.recovered ?? 0))
                                     .font(.title)
                                     .fontWeight(.bold)
                                     .foregroundColor(.green)
@@ -86,7 +86,7 @@ struct ContentView: View {
                         VStack(alignment: .center, spacing: 15) {
                             Text("確診人數")
                                 .foregroundColor(Color.black)
-                            Text(getValue(data: self.data.data.active))
+                            Text(getValue(data: self.data.data?.active ?? 0))
                                 .font(.title)
                                 .fontWeight(.bold)
                                 .foregroundColor(.yellow)
@@ -110,7 +110,7 @@ struct ContentView: View {
                                 .foregroundColor(.blue).opacity(0.7)
                                 .font(.system(size: 15))
                             
-                            Text("Latest Version: 2020/04/20")
+                            Text("Latest Version: 2020/08/04")
                                 .fontWeight(.bold)
                                 .foregroundColor(.blue).opacity(0.7)
                                 .font(.system(size: 15))
@@ -224,7 +224,7 @@ struct DetailsInfo: Decodable, Hashable {
     var recovered: Double
     var critical: Double
 //    var countryInfo: [CountryInfo]
-    
+//
 //    struct CountryInfo: Decodable {
 //        var id: Double
 //        var iso2: String
@@ -236,7 +236,7 @@ struct DetailsInfo: Decodable, Hashable {
 }
 
 class getData: ObservableObject {
-    @Published var data: GlobalInfo!
+    @Published var data: GlobalInfo?
     @Published var countries = [DetailsInfo]()
     
     init() {
@@ -251,9 +251,10 @@ class getData: ObservableObject {
         let session1 = URLSession(configuration: .default)
         let session2 = URLSession(configuration: .default)
         
-        session1.dataTask(with: URL(string: url_global)!) {
+        guard let newGlobalURL = URL(string: url_global) else { return }
+        
+        session1.dataTask(with: newGlobalURL) {
             (data, res, err) in
-            print("session1.dataTask de error:",err?.localizedDescription)
             if err != nil {
                 print((err?.localizedDescription)!)
                 return
@@ -267,17 +268,18 @@ class getData: ObservableObject {
             }
         }.resume()
         
-        
-        
         for i in country {
             let newTarget = url_all_countries + i
-            session2.dataTask(with: URL(string: newTarget)!) {
+            print("newTarget:\(newTarget)")
+            guard let myURL = URL(string: newTarget.urlEncoded()) else { return }
+            session2.dataTask(with: myURL) {
                 (data, res, err) in
                 if err != nil {
                     print((err?.localizedDescription)!)
                     return
                 }
                 let json = try! JSONDecoder().decode(DetailsInfo.self, from: data!)
+                
                 DispatchQueue.main.async {
                     print(json)
                     self.countries.append(json)
@@ -287,13 +289,9 @@ class getData: ObservableObject {
         }
     }
     
-    
 }
-//var country_default = ["Taiwan", "Japan", "S. Korea", "China","USA", "Italy"]
 
-//var country = ["Taiwan", "Japan", "Uganda", "Vietnam", "Thailand", "China", "USA", "Italy", "Spain", "Australia", "Singapore", "Russia", "UAE"]
-
-var country = ["taiwan", "japan", "usa", "uae", "singapore", "uganda", "china", "italy", "spain", "vietnam"]
+var country = ["taiwan", "japan", "usa", "singapore", "uganda", "china", "italy", "spain", "vietnam", "s. korea"]
 
 struct Indicator: UIViewRepresentable {
     func makeUIView(context: UIViewRepresentableContext<Indicator>) -> UIActivityIndicatorView {
@@ -307,3 +305,9 @@ struct Indicator: UIViewRepresentable {
 }
 
 
+extension String {
+    func urlEncoded() -> String {
+        let encodeUrlString = self.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        return encodeUrlString ?? ""
+    }
+}
