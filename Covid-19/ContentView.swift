@@ -150,7 +150,7 @@ func getDate(time: Double) -> String {
        let format = NumberFormatter()
        format.numberStyle = .decimal
        format.groupingSeparator = ","
-       format.groupingSize = 4
+       format.groupingSize = 3
 //       format.positivePrefix = "前綴字"
 //       format.positiveSuffix = "後綴字"
     return format.string(for: data)!
@@ -251,6 +251,8 @@ class getData: ObservableObject {
         let session1 = URLSession(configuration: .default)
         let session2 = URLSession(configuration: .default)
         
+        //Decreasing to use the exclamation mark, it would cause app crush and failed to fetch data(error:nil value).
+        //Using the question mark is a better choice for building apps.
         guard let newGlobalURL = URL(string: url_global) else { return }
         
         session1.dataTask(with: newGlobalURL) {
@@ -304,10 +306,16 @@ struct Indicator: UIViewRepresentable {
     }
 }
 
-
+//String的Extension, 是為了將URL(string: xxx)中的 URL string進行重新編碼(例如像是空白鍵 S. Korea)
 extension String {
+    //將原始URL String -> 編碼成為Valid的URL String
     func urlEncoded() -> String {
         let encodeUrlString = self.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         return encodeUrlString ?? ""
+    }
+    
+    //將原始或被編輯過的URL String -> 去除編碼轉換為最原始的URL String
+    func urlDecoded() -> String {
+        return self.removingPercentEncoding ?? ""
     }
 }
