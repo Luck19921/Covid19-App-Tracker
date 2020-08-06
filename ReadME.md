@@ -10,4 +10,4 @@
   * 2020/04/24 I'm trying to fix the problem about searching some special country that made app crushing.<br>
     * ~But it seems like string issue???? Working on it and need more time.~ DONE!<br>
 
-### All of the references and learning materials https://kavsoft.tech/
+### All of the references and learning materials: https://kavsoft.tech/
