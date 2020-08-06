@@ -1,11 +1,8 @@
 language: swift
 os: osx
-
-git:
-  depth: 1
-  
-  jobs:
+osx_image: xcode11.6
+jobs:
   include:
-    - stage: test
-      name: my first iOS sync test
-      osx_image: xcode11.6
+   - stage: "Build & Test"
+   - script: xcodebuild -workspace Covid-19.xcodeproj -scheme Covid-19Test -sdk iphonesimulator -destination platform="iOS Simulator,name=iPhone 11 Pro Max,OS=13.6"
+      name: "Build Example Project"
