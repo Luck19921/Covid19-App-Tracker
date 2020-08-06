@@ -1,11 +1,9 @@
-language: swift
 os: osx
+language: swift
 osx_image: xcode11.6
-git:
-  depth: 1
-  
-jobs:
-  include:
-   - stage: "Build & Test"
-   - script: xcodebuild -workspace Covid-19.xcodeproj -scheme Covid-19Test -sdk iphonesimulator -destination platform="iOS Simulator,name=iPhone 11 Pro Max,OS=13.6"
-      name: "Build Example Project"
+xcode_project: Covid-19.xcodeproj
+xcode_scheme: Covid-19Test
+xcode_sdk: iphonesimulator13.6
+xcode_destination: platform=iOS Simulator,OS=13.6,name=iPhone 11
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
