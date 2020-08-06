@@ -1,0 +1,5 @@
+language: swift
+os: osx
+
+git:
+  depth: 1
