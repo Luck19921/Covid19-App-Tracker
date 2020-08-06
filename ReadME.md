@@ -1,4 +1,4 @@
-# Covid-19 Information App for iOS (iOS version: above iOS 13)
+# Covid-19 Information App for iOS (iOS 13 and above)
 
 ## Development Tool:
   * At first, I used SwiftUI framework on Xcode 11.4(11E146). For now, I use Xcode 11.6(11E708). <br>
