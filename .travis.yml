@@ -3,3 +3,9 @@ os: osx
 
 git:
   depth: 1
+  
+  jobs:
+  include:
+    - stage: test
+      name: my first iOS sync test
+      osx_image: xcode11.6
