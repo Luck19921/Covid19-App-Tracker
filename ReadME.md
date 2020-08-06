@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Luck19921/Covid19-Info.svg?branch=master)](https://travis-ci.org/Luck19921/Covid19-Info)
+
 # Covid-19 Information App for iOS (iOS 13 and above)
 
 ## Development Tool:
