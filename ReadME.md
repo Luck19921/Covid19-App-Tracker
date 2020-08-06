@@ -3,7 +3,7 @@
 
 
 ## Maintain Daily:
-This is one of my practice projects, not serious one. Apparently, this isn't a perfect version. I probably will keep updating and revising it during my leisure time.
+This is one of my practice projects, not serious one. Apparently, this isn't a perfect version. I probably will keep updating and revising it during my leisure time.<br>
 Xcode Version 11.4(11E146) SwiftUI framework.
 2020/04/14 made by Albert Cheng from Taiwan[TW] (github: @Lucky19921), revising and upload on 2020/04/15.
 2020/04/23 API address is invalid, I will fix it recently.
