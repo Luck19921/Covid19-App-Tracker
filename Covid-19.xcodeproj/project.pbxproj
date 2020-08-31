@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55347AA724FD090E00548CB1 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55347AA624FD090E00548CB1 /* ActivityIndicator.swift */; };
+		55347AAA24FD097C00548CB1 /* StrExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55347AA924FD097C00548CB1 /* StrExtension.swift */; };
+		55347AAC24FD09A200548CB1 /* getData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55347AAB24FD09A200548CB1 /* getData.swift */; };
 		556DF2502445595A00A4C4C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556DF24F2445595A00A4C4C7 /* AppDelegate.swift */; };
 		556DF2522445595A00A4C4C7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556DF2512445595A00A4C4C7 /* SceneDelegate.swift */; };
 		556DF2542445595A00A4C4C7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556DF2532445595A00A4C4C7 /* ContentView.swift */; };
@@ -16,6 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		55347AA624FD090E00548CB1 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		55347AA924FD097C00548CB1 /* StrExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrExtension.swift; sourceTree = "<group>"; };
+		55347AAB24FD09A200548CB1 /* getData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getData.swift; sourceTree = "<group>"; };
 		556DF24C2445595A00A4C4C7 /* Covid-19.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Covid-19.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		556DF24F2445595A00A4C4C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		556DF2512445595A00A4C4C7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +65,9 @@
 				556DF24F2445595A00A4C4C7 /* AppDelegate.swift */,
 				556DF2512445595A00A4C4C7 /* SceneDelegate.swift */,
 				556DF2532445595A00A4C4C7 /* ContentView.swift */,
+				55347AAB24FD09A200548CB1 /* getData.swift */,
+				55347AA624FD090E00548CB1 /* ActivityIndicator.swift */,
+				55347AA924FD097C00548CB1 /* StrExtension.swift */,
 				556DF2552445595D00A4C4C7 /* Assets.xcassets */,
 				556DF25A2445595D00A4C4C7 /* LaunchScreen.storyboard */,
 				556DF25D2445595D00A4C4C7 /* Info.plist */,
@@ -148,7 +157,10 @@
 			files = (
 				556DF2502445595A00A4C4C7 /* AppDelegate.swift in Sources */,
 				556DF2522445595A00A4C4C7 /* SceneDelegate.swift in Sources */,
+				55347AAC24FD09A200548CB1 /* getData.swift in Sources */,
+				55347AAA24FD097C00548CB1 /* StrExtension.swift in Sources */,
 				556DF2542445595A00A4C4C7 /* ContentView.swift in Sources */,
+				55347AA724FD090E00548CB1 /* ActivityIndicator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +296,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Covid-19/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -296,6 +309,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Albert-Cheng.Covid-19";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -305,6 +319,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Covid-19/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -317,6 +332,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Albert-Cheng.Covid-19";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
