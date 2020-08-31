@@ -9,6 +9,7 @@
   * 2020/04/23 API address is invalid, I will fix it recently.<br>
   * 2020/04/24 I'm trying to fix the problem about searching some special country that made app crushing.<br>
   * 2020/08/07 Fix the issue about error of fetching data at specific country. Some countries name have blank. There it results in fetching error. For example, S. Korea, Hong Kong and Burkina Faso... etc,.<br>
+  * 2020/08/31 Sperate some class and function. That will not influence App.<br>
     * ~But it seems like string issue???? Working on it and need more time.~ Fix and Done!<br>
 
 ### All of the references and learning materials: https://kavsoft.tech/
