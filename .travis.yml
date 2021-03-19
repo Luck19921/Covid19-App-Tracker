@@ -1,9 +1,9 @@
 os: osx
 language: swift
-osx_image: xcode11.6
+osx_image: xcode12.2
 xcode_project: Covid-19.xcodeproj
 xcode_scheme: Covid-19Test
-xcode_sdk: iphonesimulator13.6
-xcode_destination: platform=iOS Simulator,OS=13.6,name=iPhone 11
+xcode_sdk: iphonesimulator14.4
+xcode_destination: platform=iOS Simulator,OS=14.4,name=iPhone 11
 after_success:
   - bash <(curl -s https://codecov.io/bash)
