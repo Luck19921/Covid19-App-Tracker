@@ -1,6 +1,6 @@
 os: osx
 language: swift
-osx_image: xcode12.4
+osx_image: xcode12.2
 xcode_project: Covid-19.xcodeproj
 xcode_scheme: Covid-19Test
 xcode_sdk: iphonesimulator14.4
