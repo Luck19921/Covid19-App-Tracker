@@ -16,7 +16,7 @@ extension String {
         return encodeUrlString ?? ""
     }
     
-    //將原始或被編輯過的URL String -> 去除編碼轉換為最原始的URL String
+    //將原始或被編輯過的URL String -> 解碼轉換為最原始的URL String
     func urlDecoded() -> String {
         return self.removingPercentEncoding ?? ""
     }

@@ -131,8 +131,7 @@ struct ContentView: View {
                         }
                     }
                 }
-            }.edgesIgnoringSafeArea(.top)
-                .background(Color.black.opacity(0.1).edgesIgnoringSafeArea(.all))
+            }.background(Color.black.opacity(0.1).edgesIgnoringSafeArea(.all))
         }.edgesIgnoringSafeArea(.all)
     }
 }
