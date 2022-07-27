@@ -11,6 +11,6 @@
   * 2020/08/07 Fix the issue about error of fetching data at specific country. Some countries name have blank. There it results in fetching error. For example, S. Korea, Hong Kong and Burkina Faso... etc,.<br>
   * ~But it seems like string issue???? Working on it and need more time.~ Fix and Done!<br>
   * 2020/08/31 Sperate some class and function. That will not influence App.<br>
-  * 2021/03/19 This app still works but I'm too busy to maintain this app anymore.<br>
+  * 2021/03/19 This app still works but I'm too busy to maintain this app.<br>
     
 ### All of the references and learning materials: https://kavsoft.tech/
